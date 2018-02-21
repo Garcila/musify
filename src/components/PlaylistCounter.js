@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 
-class SongsStats extends Component {
+class PlaylistCounter extends Component {
   render() {
+    const numberLists = this.props.playlists.length;
     return (
-      <div style={styles.information}>Information about songs</div>
+      <div>
+        <div style={styles.information}>Number of Playlists: {numberLists}</div>
+      </div>
     );
   }
 }
@@ -11,7 +14,7 @@ class SongsStats extends Component {
 const styles = {
   information: {
     flex: 1,
-    background: 'rgb(20,200,200)',
+    background: '#0A2012',
     border: 'grey',
     borderRadius: 2,
     fontSize: '1.2rem',
@@ -20,4 +23,4 @@ const styles = {
   }
 }
 
-export default SongsStats;
+export default PlaylistCounter;

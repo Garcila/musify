@@ -4,7 +4,7 @@ class Playlist extends Component {
   render() {
     return (
       <div style={styles.list}>
-        <img />
+        <img alt='albumCover'/>
         <h3 >List Name</h3>
         <ul >
           <li>one</li>

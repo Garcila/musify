@@ -1,26 +1,102 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import './App.css';
 
 import Title from './components/Title';
-import SongsStats from './components/SongsStats';
+import PlaylistCounter from './components/PlaylistCounter';
+import HoursCounter from './components/HoursCounter';
 import Filter from './components/Filter';
-import Playlist from './components/Playlist';
+// import Playlist from './components/Playlist';
+import PlaylistGroup from './components/PlaylistGroup';
 
-let textColor = '#fff';
+let ForestGreen = '#0D2C14';
+// let DarkSlateGray = '#0A2012';
+let LightGrey = '#DBD3D8';
+// let SeaGreen = '#1B503E';
+// let LightSlateGray = '#94A6AB';
+let textColor = LightGrey;
+
+let fakeServerData = {
+  user: {
+    name: 'Zapato',
+    playlists: [
+      {
+        name: 'My favorites',
+        songs: [
+          {name:'ne', duration: 1352}, 
+          {name:'ene', duration: 1352}, 
+          {name:'rne', duration: 1352}
+        ],
+      },
+      {
+        name: 'My rites',
+        songs: [
+          {name:'ne', duration: 1352}, 
+          {name:'ene', duration: 152}, 
+          {name:'rne', duration: 1352}
+        ],
+      },
+      {
+        name: 'My tes',
+        songs: [
+          {name:'ne', duration: 135}, 
+          {name:'ene', duration: 1352}, 
+          {name:'rne', duration: 152}
+        ],
+      },
+      {
+        name: 'Mavorites',
+        songs: [
+          {name:'ne', duration: 352}, 
+          {name:'ene', duration: 1352}, 
+          {name:'rne', duration: 1352}
+        ],
+      }
+    ]
+  }
+};
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      serverData: {},
+      filterString: '',
+    }
+
+    this.setFilterString = this.setFilterString.bind(this);
+  }
+
+  componentDidMount() {
+    this.setState({ serverData: fakeServerData });
+  }
+
+  setFilterString(e) {
+    this.setState({filterString: e.target.value});
+  }
+
   render() {
+    const { playlists } = this.state.serverData.user || '';
     return (
       <div style={styles.App} className="App">
-        <Title name="this is the title" />
-        <div style={styles.SongsStats}>
-          <SongsStats />
-          <SongsStats />
-        </div>
-        <Filter />
-        <Playlist />
-        <Playlist />
-        <Playlist />
+        {this.state.serverData.user ?
+          <Fragment>
+            <Title
+              name={this.state.serverData.user.name}
+            />
+            <div style={styles.Information}>
+              <PlaylistCounter playlists={playlists} />
+              <HoursCounter playlists={playlists} />
+            </div>
+            <Filter 
+              setFilterString={this.setFilterString}
+            />
+            <PlaylistGroup 
+              playlists={playlists}
+              filterString={this.state.filterString}
+            /> 
+          </Fragment> : <h1>Loading...</h1>
+        }
       </div>
     );
   }
@@ -29,11 +105,11 @@ class App extends Component {
 const styles = {
   App: {
     color: textColor,
-    backgroundColor: 'rgb(205,200,20)'
+    backgroundColor: ForestGreen
   },
-  SongsStats: {
+  Information: {
     display: 'flex',
-    padding: '1rem',
+    justifyContent: 'center'
   }
 }
 

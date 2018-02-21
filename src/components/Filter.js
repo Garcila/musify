@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 
 class Filter extends Component {
+
   render() {
     return (
       <div>
-        <input style={styles.input} placeholder='search' />
+        <input 
+          onChange={e => this.props.setFilterString(e)} 
+          style={styles.input} 
+          placeholder='search' 
+        />
       </div>
     );
   }
@@ -12,7 +17,8 @@ class Filter extends Component {
 
 const styles = {
   input: {
-    padding: '1rem 1rem',
+    padding: '0.2rem',
+    margin: '1rem',
     fontSize: '2rem'
   }
 }

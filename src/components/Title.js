@@ -2,13 +2,13 @@ import React from 'react';
 
 const Title = ({ name }) => {
   return (
-    <h1 style={styles.title}>{name}</h1>
+    <h1 style={styles.title}>this is the {name}</h1>
   );
 }
 
 const styles = {
   title: {
-    background: 'rgb(200,140,180)',
+    background: '#1B503E',
     fontSize: '2rem',
     border: 'blue',
     borderRadius: 2,
