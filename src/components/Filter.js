@@ -6,7 +6,7 @@ class Filter extends Component {
     return (
       <div>
         <input 
-          onChange={e => this.props.setFilterString(e)} 
+          onChange={e => this.props.setFilterString(e.target.value)} 
           style={styles.input} 
           placeholder='search' 
         />

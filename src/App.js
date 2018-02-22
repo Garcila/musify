@@ -20,7 +20,7 @@ let fakeServerData = {
     name: 'Zapato',
     playlists: [
       {
-        name: 'My favorites',
+        name: 'ONeOne',
         songs: [
           {name:'ne', duration: 1352}, 
           {name:'ene', duration: 1352}, 
@@ -36,7 +36,7 @@ let fakeServerData = {
         ],
       },
       {
-        name: 'My tes',
+        name: 'My lll',
         songs: [
           {name:'ne', duration: 135}, 
           {name:'ene', duration: 1352}, 
@@ -72,11 +72,15 @@ class App extends Component {
   }
 
   setFilterString(e) {
-    this.setState({filterString: e.target.value});
+    this.setState({filterString: e});
   }
 
   render() {
     const { playlists } = this.state.serverData.user || '';
+    let filtered = playlists ? 
+                    playlists.filter(list => list.name.toLowerCase()
+                    .includes(this.state.filterString.toLowerCase())) : 
+                   '';
     return (
       <div style={styles.App} className="App">
         {this.state.serverData.user ?
@@ -85,15 +89,15 @@ class App extends Component {
               name={this.state.serverData.user.name}
             />
             <div style={styles.Information}>
-              <PlaylistCounter playlists={playlists} />
-              <HoursCounter playlists={playlists} />
+              <PlaylistCounter playlists={filtered} />
+              <HoursCounter playlists={filtered} />
             </div>
             <Filter 
               setFilterString={this.setFilterString}
             />
             <PlaylistGroup 
               playlists={playlists}
-              filterString={this.state.filterString}
+              filtered={filtered}
             /> 
           </Fragment> : <h1>Loading...</h1>
         }

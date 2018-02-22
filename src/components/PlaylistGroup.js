@@ -2,9 +2,9 @@ import React, { Component, Fragment } from 'react';
 
 class PlayListGroup extends Component {
   render() {
-    const playlist = this.props.playlists
-      .filter(list => list.name.toLowerCase().includes(this.props.filterString.toLowerCase()))
-      .map(l => 
+    // const playlist = this.props.playlists
+    //   .filter(list => list.name.toLowerCase().includes(this.props.filterString.toLowerCase()))
+      const playlist = this.props.filtered.map(l => 
       <div style={styles.list} key={l.name}>
         <img alt='albumCover' />
         <h3 >{l.name}</h3>
